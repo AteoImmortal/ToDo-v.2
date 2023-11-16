@@ -1,0 +1,99 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+h2{
+    text-align: center;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.todo__header{
+    display: flex;
+    flex-direction: column;
+}
+
+.todo__header h2{
+    padding-bottom: 5px;
+    border-bottom: 2px solid #cecece;
+}
+
+.todo__wrapper{
+    margin: 30px auto;
+    padding: 30px 20px;
+    width: 400px;
+
+    border: 2px solid #cecece;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px #989898;
+}
+
+.todo__input {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.delete__all__btn {
+    margin-bottom: 40px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+
+    background-color: #cfe9ff;
+}
+
+.delete__all__btn:hover{
+    background-color: rgb(207, 232, 255, 0.7);
+}
+
+.todo__tasks{
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+}
+
+.todo__task{
+    padding: 5px 0 5px 10px;
+    display: flex;
+    align-items: center;
+    border: 2px solid #cecece;
+    border-radius: 4px;
+    box-shadow: 5px 5px 10px #989898;
+}
+
+.todo_checkbox{
+    width: 17px;
+    height: 17px;
+    margin-right: 10px;
+}
+
+.todo_checkbox .checked{
+    background: red;
+    outline-color: red;
+    color: red;
+}
+
+.todo__task__content{
+    margin-right: auto;
+    max-width: 180px;
+    word-break: break-all;
+}
+
+.btn{
+    margin-right: 10px;
+    padding: 2px;
+}
+
+.isDone .todo__task__content{
+    text-decoration: line-through;
+    color: red;
+}
