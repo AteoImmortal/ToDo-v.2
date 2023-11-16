@@ -84,14 +84,19 @@ function ToDoList(){
         ul.classList.add('todo__tasks');
 
         let listToDo = '';
+        const checkEdit = checkEditTodoHelper();
         todos.forEach(({id, task, isDone, isEdit})=> {
             listToDo += `   <li class='todo__task${isDone ? ' isDone': ''}'>
                                 ${!isEdit ? `
                                 <input type='checkbox' ${isDone ? 'checked': ''} id='${id}' class='todo_checkbox'>
                                 <p class="todo__task__content">${task}</p>
                                 <button class='todo__delete__btn btn' ${!isDone ? 'disabled': ''} data-delete='${id}'>Удалить</button>
-                                <button class='todo__edit__btn btn'>Редактировать</button>`: `
-                                <input type='text' value='${task}'>`}
+                                <button class='todo__edit__btn btn' ${checkEdit? 'disabled' : ''} data-edit='${id}'>Редактировать</button>`
+                                :`
+                                <input type='text' value='${task}' class='todo__input'>
+                                <button class='todo__edit__cancel btn'>Отменить</button>
+                                <button class='todo__edit__save btn'>Сохранить</button>
+                                `}
                                 
                             </li>`
         })
@@ -101,6 +106,28 @@ function ToDoList(){
         todoBody.appendChild(ul);
         addCheckBoxsEvent();
         addDeleteTodoEvent();
+        getEditTodoEvent()
+    }
+    
+    const getEditTodoEvent = () => {
+        const editButtons = document.querySelectorAll('.todo__edit__btn');
+        editButtons.forEach((editButton)=>{
+            editButton.addEventListener('click', (event)=>{
+                const btn = event.target;
+                const todoId = btn.dataset.edit;
+                todos = todos.map((todo) => {
+                    if(todo.id === todoId){
+                        todo.isEdit = true;
+                    }
+                    return todo;
+                })
+                showToDoTask();
+            })
+        })
+    }
+
+    const checkEditTodoHelper = () => {
+        return todos.some(({isEdit})=> isEdit)
     }
 
     const addDeleteTodoEvent = () => {
@@ -109,7 +136,6 @@ function ToDoList(){
             deleteButton.addEventListener('click', (event)=>{
                 const btn = event.target;
                 const todoId = btn.dataset.delete;
-                const isDisabled = btn.disabled;
                 todos = todos.filter((todo)=> todo.id !== todoId)
                 showToDoTask();
             })
