@@ -91,11 +91,11 @@ function ToDoList(){
                                 <input type='checkbox' ${isDone ? 'checked': ''} id='${id}' class='todo_checkbox'>
                                 <p class="todo__task__content">${task}</p>
                                 <button class='todo__delete__btn btn' ${!isDone ? 'disabled': ''} data-delete='${id}'>Удалить</button>
-                                <button class='todo__edit__btn btn' ${checkEdit? 'disabled' : ''} data-edit='${id}'>Редактировать</button>`
+                                <button class='todo__edit__btn btn' ${checkEdit ? 'disabled' : ''} data-edit='${id}'>Редактировать</button>`
                                 :`
-                                <input type='text' value='${task}' class='todo__input'>
-                                <button class='todo__edit__cancel btn'>Отменить</button>
-                                <button class='todo__edit__save btn'>Сохранить</button>
+                                <input type='text' value='${task}' class='todo__edit__input'>
+                                <button class='todo__edit__cancel btn' data-edit-cancel='${id}'>Отменить</button>
+                                <button class='todo__edit__save btn'data-edit-save='${id}'>Сохранить</button>
                                 `}
                                 
                             </li>`
@@ -107,6 +107,10 @@ function ToDoList(){
         addCheckBoxsEvent();
         addDeleteTodoEvent();
         getEditTodoEvent()
+        if(checkEdit){
+            addEditCancelTodo();
+            addEditSaveTodo();
+        }
     }
     
     const getEditTodoEvent = () => {
@@ -128,6 +132,38 @@ function ToDoList(){
 
     const checkEditTodoHelper = () => {
         return todos.some(({isEdit})=> isEdit)
+    }
+
+    const addEditSaveTodo = () => {
+        const saveButton = document.querySelector('.todo__edit__save');
+        saveButton.addEventListener('click', (event)=>{
+            const btn = event.target;
+            const todoId = btn.dataset.editSave;
+            const newTaskValue = document.querySelector('.todo__edit__input').value;
+            todos = todos.map((todo)=> ({
+                    ...todo,
+                    ...(todo.id === todoId ? {
+                        isEdit: false,
+                        task: newTaskValue,
+                    } : undefined)
+                }
+            ))
+            showToDoTask()
+        })
+    }
+
+    const addEditCancelTodo = () => {
+        const cancelButton = document.querySelector('.todo__edit__cancel');
+        cancelButton.addEventListener('click', (event)=>{
+            const btn = event.target;
+            const todoId = btn.dataset.editCancel;
+            todos = todos.map((todo) => ({
+                    ...todo,
+                    ...(todo.id === todoId ? {isEdit: false}: undefined)
+                })
+            )
+            showToDoTask()
+        })
     }
 
     const addDeleteTodoEvent = () => {

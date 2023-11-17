@@ -88,9 +88,11 @@ h2{
     word-break: break-all;
 }
 
-.todo__task .todo__input{
+.todo__edit__input{
     margin: 0 auto 0 0;
     padding: 3px 5px;
+
+    border-radius: 5px;
     font-size: 14px;
     background-color: #f4f4f4;
 }
