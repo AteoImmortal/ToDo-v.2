@@ -45,12 +45,10 @@ function ToDoList(){
         const completeAllTasks = document.querySelector('.completed__all__tasks');
         completeAllTasks.addEventListener('click', () => {
             todos = todos.map((todo) => {
-                if(todo.isDone === false){
-                    todo.isDone = true;
-                    console.log(todo);
-                    showToDoTask();
-                }
-                return
+                todo.isDone = !todo.isDone
+                console.log(todo)
+                showToDoTask();
+                return todo;
             });
         })
     }
