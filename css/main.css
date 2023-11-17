@@ -34,14 +34,13 @@ h2{
 
 .todo__input {
     margin-top: 25px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     padding: 5px;
     font-size: 20px;
     border-radius: 5px;
 }
 
 .delete__all__btn {
-    margin-bottom: 40px;
     padding: 5px;
     cursor: pointer;
     border-radius: 5px;
@@ -53,6 +52,21 @@ h2{
 
 .delete__all__btn:hover{
     background-color: rgb(207, 232, 255, 0.7);
+}
+
+.completed__all__tasks {
+    margin: 10px 0 40px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+
+    background-color: #89f785;
+}
+
+.completed__all__tasks:hover {
+    background-color: rgb(139, 247, 135, 0.7);
 }
 
 .todo__tasks{

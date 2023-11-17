@@ -9,7 +9,7 @@ function ToDoList(){
         {
             id: '2',
             task: 'Выучить css',
-            isDone: true,
+            isDone: false,
             isEdit: false,
         }
     ];
@@ -25,10 +25,12 @@ function ToDoList(){
         addToDoInputEvent();
         addDeleteAllTodosEvent();
         showToDoTask();
+        addCompletedAllTasks();
 
         
     }
-    const addDeleteAllTodosEvent = ()=>{
+
+    const addDeleteAllTodosEvent = () => {
         const deleteAllBtn = document.querySelector('.delete__all__btn');
         deleteAllBtn.addEventListener('click', () => {
             if(todos.length !== 0){
@@ -38,6 +40,21 @@ function ToDoList(){
             return
         })
     }
+
+    const addCompletedAllTasks = () => {
+        const completeAllTasks = document.querySelector('.completed__all__tasks');
+        completeAllTasks.addEventListener('click', () => {
+            todos = todos.map((todo) => {
+                if(todo.isDone === false){
+                    todo.isDone = true;
+                    console.log(todo);
+                    showToDoTask();
+                }
+                return
+            });
+        })
+    }
+
 
     const addToDoInputEvent = () => {
         const toDoInput = document.querySelector('.todo__input');
@@ -67,6 +84,7 @@ function ToDoList(){
                     <h2>Список дел</h2>
                     <input type='text' class='todo__input' placeholder='Введите задачу'>
                     <button class='delete__all__btn'>Очистить список дел</button>
+                    <button class='completed__all__tasks'>Выполнить всё</button>
                 </header>
                 <div class='todo__body'></div>
             </div>
